@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/run"
+            android:title="跑操查询"
+            android:icon="@drawable/ic_run"/>
+
+        <item
+            android:id="@+id/score"
+            android:title="成绩查询"
+            android:icon="@drawable/ic_score"/>
+
+        <item
+            android:id="@+id/schooldays"
+            android:title="校历"
+            android:icon="@drawable/ic_schooldays"/>
+
+        <item
+            android:id="@+id/notice"
+            android:title="校新闻通知"
+            android:icon="@drawable/ic_notice"/>
+
+        <item
+            android:id="@+id/library"
+            android:title="图书馆"
+            android:icon="@drawable/ic_library"/>
+
+        <item
+            android:id="@+id/about_us"
+            android:title="关于我们"
+            android:icon="@drawable/ic_about_us"/>
+
+
+
+
+    </group>
+
+</menu>
