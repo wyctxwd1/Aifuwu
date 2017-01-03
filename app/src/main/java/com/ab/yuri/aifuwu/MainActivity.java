@@ -1,5 +1,6 @@
 package com.ab.yuri.aifuwu;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         break;
 
+                    case R.id.schooldays:
+                        Intent intent=new Intent(MainActivity.this,SchooldaysActivity.class);
+                        startActivity(intent);
+                        break;
+
                 }
                 return true;
             }
@@ -80,18 +86,11 @@ public class MainActivity extends AppCompatActivity {
         usesList.add(about_us);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_right,menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.main_home:
-                Toast.makeText(this,"主页",Toast.LENGTH_SHORT).show();
-                break;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;

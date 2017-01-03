@@ -1,0 +1,29 @@
+[33mcommit 8e345d3193a240502b566eefb636226da119e5d4[m
+Author: wyctxwd1 <469104809@qq.com>
+Date:   Tue Jan 3 22:24:02 2017 +0800
+
+    Revert "Second commit"
+    
+    This reverts commit b624cbe973245b9d082712e264d6caf8009820e5.
+
+[33mcommit b624cbe973245b9d082712e264d6caf8009820e5[m
+Author: wyctxwd1 <469104809@qq.com>
+Date:   Tue Jan 3 22:12:37 2017 +0800
+
+    Second commit
+    
+    校历功能完成
+
+[33mcommit 6b92c8ce60b0382a10c1e63eea0f06e0df21b867[m
+Author: wyctxwd1 <469104809@qq.com>
+Date:   Tue Jan 3 19:28:34 2017 +0800
+
+    First commit
+    
+    主页面修改
+
+[33mcommit d598c64953b9157992ed75df73207b1b3dc2cb10[m
+Author: Echan <469104809@qq.com>
+Date:   Tue Jan 3 18:59:29 2017 +0800
+
+    Initial commit
