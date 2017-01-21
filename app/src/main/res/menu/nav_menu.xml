@@ -4,32 +4,32 @@
         <item
             android:id="@+id/run"
             android:title="跑操查询"
-            android:icon="@drawable/ic_run"/>
+            android:icon="@drawable/img_run_big"/>
 
         <item
             android:id="@+id/score"
             android:title="成绩查询"
-            android:icon="@drawable/ic_score"/>
+            android:icon="@drawable/img_score_big"/>
 
         <item
             android:id="@+id/schooldays"
             android:title="校历"
-            android:icon="@drawable/ic_schooldays"/>
+            android:icon="@drawable/img_schooldays_big"/>
 
         <item
             android:id="@+id/notice"
             android:title="校新闻通知"
-            android:icon="@drawable/ic_notice"/>
+            android:icon="@drawable/img_notice_big"/>
 
         <item
             android:id="@+id/library"
             android:title="图书馆"
-            android:icon="@drawable/ic_library"/>
+            android:icon="@drawable/img_library_big"/>
 
         <item
             android:id="@+id/about_us"
             android:title="关于我们"
-            android:icon="@drawable/ic_about_us"/>
+            android:icon="@drawable/img_about_us_big"/>
 
 
 

@@ -1,6 +1,7 @@
 package com.ab.yuri.aifuwu;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,36 +12,77 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static final String STUDENT_NAME="student_name";
+    public static final String STUDENT_DEPARTMENT="student_department";
+    public static final String STUDENT_MAJOR="student_major";
     private List<Uses> usesList=new ArrayList<>();
     private UsesAdapter adapter;
     private DrawerLayout mDrawerLayout;
+    private NavigationView navView;
+    private Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar main_toolbar= (Toolbar) findViewById(R.id.main_toolbar);
+        Intent intent=getIntent();
+        final String studentName=intent.getStringExtra(STUDENT_NAME);
+        final String studentDepartment=intent.getStringExtra(STUDENT_DEPARTMENT);
+        final String studentMajor=intent.getStringExtra(STUDENT_MAJOR);
+
+        mainToolbar= (Toolbar) findViewById(R.id.main_toolbar);
         mDrawerLayout= (DrawerLayout) findViewById(R.id.main_drawer_layout);
-        NavigationView navView= (NavigationView) findViewById(R.id.nav_view);
-        RecyclerView recyclerView= (RecyclerView) findViewById(R.id.main_recycler_view);
+        navView= (NavigationView) findViewById(R.id.nav_view);
+        final RecyclerView recyclerView= (RecyclerView) findViewById(R.id.main_recycler_view);
 
 
-        setSupportActionBar(main_toolbar);
+
+
+
+        setSupportActionBar(mainToolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_main_menu_left);
         }
+
+
+
+        /*
+        添加数据
+         */
+        final View headerLayout = navView.inflateHeaderView(R.layout.nav_header);
+        TextView stuName= (TextView) headerLayout.findViewById(R.id.stu_name);
+        TextView stuDepartment= (TextView) headerLayout.findViewById(R.id.stu_department);
+        TextView stuMajor= (TextView) headerLayout.findViewById(R.id.stu_major);
+        stuName.setText(studentName);
+        stuDepartment.setText(studentDepartment);
+        stuMajor.setText(studentMajor);
+        Glide.with(this).load(R.drawable.bg_head).into(new SimpleTarget<GlideDrawable>() {
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    headerLayout.setBackground(resource);
+                }
+            }
+        });
+
+
+
 
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -85,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
         Uses about_us=new Uses("关于我们",R.drawable.img_about_us_big);
         usesList.add(about_us);
     }
+
+
+
 
 
 
