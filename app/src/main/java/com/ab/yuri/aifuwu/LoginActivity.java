@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private CheckBox rememberPass;
     public ProgressDialog progressDialog;
+    public static String idNumeber;
 
 
 
@@ -65,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                 requestInfo(account,password);
             }
         });
+
+        idNumeber=accountExit.getText().toString();
 
 
     }
@@ -111,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText=response.body().string();
                 final Info info= Utility.handleInfoResponse(responseText);
-                Log.d("A", "onResponse: "+info.studentName+info.studentDepatment+info.studentMajor);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

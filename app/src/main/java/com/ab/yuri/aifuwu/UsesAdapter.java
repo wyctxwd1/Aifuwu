@@ -52,9 +52,13 @@ public class UsesAdapter extends RecyclerView.Adapter<UsesAdapter.ViewHolder> {
             public void onClick(View view) {
                 int position=holder.getAdapterPosition();
                 switch (position) {
+                    case 0:
+                        Intent run=new Intent(mContext,RunActivity.class);
+                        mContext.startActivity(run);
+                        break;
                     case 2:
-                    Intent intent = new Intent(mContext, SchooldaysActivity.class);
-                    mContext.startActivity(intent);
+                    Intent schooldays = new Intent(mContext, SchooldaysActivity.class);
+                    mContext.startActivity(schooldays);
                 }
 
 

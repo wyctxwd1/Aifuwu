@@ -14,6 +14,9 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -29,7 +32,7 @@ public class SchooldaysActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schooldays);
 
-        Toolbar toolbar= (Toolbar) findViewById(R.id.schooldays_toolbar);
+        final Toolbar toolbar= (Toolbar) findViewById(R.id.schooldays_toolbar);
         CollapsingToolbarLayout collapsingToolbar= (CollapsingToolbarLayout) findViewById(R.id.schooldays_collapsing_toolbar);
         ImageView schooldaysTitleView= (ImageView) findViewById(R.id.schooldays_image_view);
         ImageView schooldaysContentView= (ImageView) findViewById(R.id.schooldays_content_img);
@@ -49,8 +52,14 @@ public class SchooldaysActivity extends AppCompatActivity {
                 LayoutInflater inflater=LayoutInflater.from(SchooldaysActivity.this);
                 View dialogView=inflater.inflate(R.layout.schooldays_dialog,null);
                 final AlertDialog dialog=new AlertDialog.Builder(SchooldaysActivity.this).create();
-                PhotoView dialogImg= (PhotoView) dialogView.findViewById(R.id.schooldays_dialog_imageView);
-                dialogImg.setImageResource(R.drawable.schooldays_content_view);
+                final PhotoView dialogImg= (PhotoView) dialogView.findViewById(R.id.schooldays_dialog_imageView);
+                Glide.with(SchooldaysActivity.this).load(R.drawable.schooldays_content_view).into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        dialogImg.setImageDrawable(resource);
+                    }
+                });
+
                 dialog.setView(dialogView);
                 dialog.show();
                 dialogImg.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
