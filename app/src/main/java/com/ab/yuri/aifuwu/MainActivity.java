@@ -122,15 +122,17 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         break;
 
+                    case R.id.about_us:
+                        Intent aboutUs=new Intent(MainActivity.this,AboutUsActivity.class);
+                        startActivity(aboutUs);
+                        mDrawerLayout.closeDrawers();
+                        break;
+
                     case R.id.quit:
                         Intent quit=new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(quit);
                         mDrawerLayout.closeDrawers();
                         break;
-
-
-
-
                 }
                 return true;
             }
@@ -144,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         requestWeather();
-
 
     }
 

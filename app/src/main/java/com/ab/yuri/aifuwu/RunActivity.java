@@ -96,6 +96,7 @@ public class RunActivity extends AppCompatActivity {
             }
         });
     }
+
     /*
     通过网络请求跑操数据
      */
