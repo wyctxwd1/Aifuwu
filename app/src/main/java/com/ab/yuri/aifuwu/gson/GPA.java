@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Yuri on 2017/1/19.
  */
 
-public class Score {
+public class GPA {
 
     /**
      * gpa : 3.59
@@ -54,4 +54,7 @@ public class Score {
         @SerializedName("成绩")
         public String lessonScore;
     }
+
+
+
 }

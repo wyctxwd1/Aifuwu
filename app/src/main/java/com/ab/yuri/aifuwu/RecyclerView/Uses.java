@@ -1,4 +1,4 @@
-package com.ab.yuri.aifuwu;
+package com.ab.yuri.aifuwu.RecyclerView;
 
 /**
  * Created by Yuri on 2017/1/2.

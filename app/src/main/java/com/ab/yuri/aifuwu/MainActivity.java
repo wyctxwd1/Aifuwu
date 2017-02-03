@@ -14,15 +14,26 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ab.yuri.aifuwu.RecyclerView.Uses;
+import com.ab.yuri.aifuwu.RecyclerView.UsesAdapter;
+import com.ab.yuri.aifuwu.gson.WeatherNow;
+import com.ab.yuri.aifuwu.util.HttpUtil;
+import com.ab.yuri.aifuwu.util.Utility;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     public static final String STUDENT_NAME="student_name";
@@ -34,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView navView;
     private Toolbar mainToolbar;
+    private ImageView bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mainToolbar= (Toolbar) findViewById(R.id.main_toolbar);
         mDrawerLayout= (DrawerLayout) findViewById(R.id.main_drawer_layout);
         navView= (NavigationView) findViewById(R.id.nav_view);
+        bg= (ImageView) findViewById(R.id.bg);
         final RecyclerView recyclerView= (RecyclerView) findViewById(R.id.main_recycler_view);
 
 
@@ -65,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         /*
-        添加数据
+        添加侧边栏head数据和图片
          */
         final View headerLayout = navView.inflateHeaderView(R.layout.nav_header);
         TextView stuName= (TextView) headerLayout.findViewById(R.id.stu_name);
@@ -83,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        加载背景
+         */
+        Glide.with(this).load(R.drawable.bg).into(bg);
+
+
+
 
 
 
@@ -92,13 +112,29 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.run:
+                        Intent run=new Intent(MainActivity.this,RunActivity.class);
+                        startActivity(run);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.score:
+                        Intent score=new Intent(MainActivity.this,ScoreActivity.class);
+                        startActivity(score);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.schooldays:
+                        Intent schooldays=new Intent(MainActivity.this,SchooldaysActivity.class);
+                        startActivity(schooldays);
                         mDrawerLayout.closeDrawers();
                         break;
 
-                    case R.id.schooldays:
-                        Intent intent=new Intent(MainActivity.this,SchooldaysActivity.class);
-                        startActivity(intent);
+                    case R.id.quit:
+                        Intent quit=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(quit);
+                        mDrawerLayout.closeDrawers();
                         break;
+
+
+
 
                 }
                 return true;
@@ -112,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
         adapter=new UsesAdapter(usesList);
         recyclerView.setAdapter(adapter);
 
+        requestWeather();
+
 
     }
 
@@ -122,12 +160,50 @@ public class MainActivity extends AppCompatActivity {
         usesList.add(score);
         Uses schooldays=new Uses("校历",R.drawable.img_schooldays_big);
         usesList.add(schooldays);
-        Uses notice=new Uses("校新闻通知",R.drawable.img_notice_big);
-        usesList.add(notice);
         Uses library=new Uses("图书馆",R.drawable.img_library_big);
         usesList.add(library);
-        Uses about_us=new Uses("关于我们",R.drawable.img_about_us_big);
-        usesList.add(about_us);
+    }
+
+    public void requestWeather(){
+        final String weatherUrl="http://guolin.tech/api/weather?cityid=CN101190101&key=56ad57d30e4e43888f020ed6a592dd40";
+        HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseText=response.body().string();
+                final WeatherNow weatherNow= Utility.handleWeatherResponse(responseText);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (weatherNow!=null&&"ok".equals(weatherNow.status)){
+                            showWeatherInfo(weatherNow);
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
+    private void showWeatherInfo(WeatherNow weatherNow){
+        String updateTime =weatherNow.basic.update.loc.split(" ")[0];
+        String weatherInfo = weatherNow.now.cond.txt;
+        String degree = weatherNow.now.tmp + "℃";
+        TextView update= (TextView) findViewById(R.id.title_update_time);
+        TextView weatherInfoText= (TextView) findViewById(R.id.weather_info_text);
+        TextView degreeText= (TextView) findViewById(R.id.degree_text);
+        update.setText(updateTime);
+        weatherInfoText.setText(weatherInfo);
+        degreeText.setText(degree);
+
+
+
+
     }
 
 

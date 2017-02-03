@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox rememberPass;
     public ProgressDialog progressDialog;
     public static String idNumeber;
+    public static String idPassword;
 
 
 
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         idNumeber=accountExit.getText().toString();
+        idPassword=passwordEdit.getText().toString();
 
 
     }

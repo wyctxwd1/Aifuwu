@@ -3,8 +3,13 @@ package com.ab.yuri.aifuwu.util;
 import android.util.Log;
 
 import com.ab.yuri.aifuwu.gson.Exercise;
+import com.ab.yuri.aifuwu.gson.GPA;
 import com.ab.yuri.aifuwu.gson.Info;
+import com.ab.yuri.aifuwu.gson.WeatherNow;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -41,6 +46,31 @@ public class Utility {
             Gson gson=new Gson();
             Exercise exercise=gson.fromJson(response,Exercise.class);
             return exercise;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static GPA handleGPAResponse(String response){
+        try {
+            Gson gson=new Gson();
+            GPA gpa=gson.fromJson(response,GPA.class);
+            return gpa;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static WeatherNow handleWeatherResponse(String response){
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            Gson gson=new Gson();
+            WeatherNow weatherNow=gson.fromJson(weatherContent,WeatherNow.class);
+            return weatherNow;
         }catch (Exception e){
             e.printStackTrace();
         }

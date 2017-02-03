@@ -15,12 +15,6 @@
             android:id="@+id/schooldays"
             android:title="校历"
             android:icon="@drawable/img_schooldays_big"/>
-
-        <item
-            android:id="@+id/notice"
-            android:title="校新闻通知"
-            android:icon="@drawable/img_notice_big"/>
-
         <item
             android:id="@+id/library"
             android:title="图书馆"
@@ -30,6 +24,10 @@
             android:id="@+id/about_us"
             android:title="关于我们"
             android:icon="@drawable/img_about_us_big"/>
+        <item
+            android:id="@+id/quit"
+            android:title="注销"
+            android:icon="@drawable/img_quit_big"/>
 
 
 

@@ -1,16 +1,18 @@
-package com.ab.yuri.aifuwu;
+package com.ab.yuri.aifuwu.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.ab.yuri.aifuwu.R;
+import com.ab.yuri.aifuwu.RunActivity;
+import com.ab.yuri.aifuwu.SchooldaysActivity;
+import com.ab.yuri.aifuwu.ScoreActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -55,6 +57,10 @@ public class UsesAdapter extends RecyclerView.Adapter<UsesAdapter.ViewHolder> {
                     case 0:
                         Intent run=new Intent(mContext,RunActivity.class);
                         mContext.startActivity(run);
+                        break;
+                    case 1:
+                        Intent score=new Intent(mContext,ScoreActivity.class);
+                        mContext.startActivity(score);
                         break;
                     case 2:
                     Intent schooldays = new Intent(mContext, SchooldaysActivity.class);

@@ -1,5 +1,6 @@
 package com.ab.yuri.aifuwu;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,15 +8,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +24,6 @@ import com.ab.yuri.aifuwu.widget.NoScrollListView;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,6 +38,7 @@ public class RunActivity extends AppCompatActivity {
     private NestedScrollView scrollView;
     private ImageView bgRun;
     private SwipeRefreshLayout refreshLayout;
+    private AppBarLayout mAppBarLayout;
 
 
 
@@ -58,8 +55,7 @@ public class RunActivity extends AppCompatActivity {
         scrollView= (NestedScrollView) findViewById(R.id.run_scroll);
         bgRun= (ImageView) findViewById(R.id.bg_run);
         refreshLayout= (SwipeRefreshLayout) findViewById(R.id.refresh_run);
-
-
+        mAppBarLayout= (AppBarLayout) findViewById(R.id.run_appBar);
 
 
         setSupportActionBar(mToolbar);
@@ -74,6 +70,8 @@ public class RunActivity extends AppCompatActivity {
 
         requestRun(LoginActivity.idNumeber,MainActivity.stuName);
 
+        runLayout.setVisibility(View.INVISIBLE);
+
 
         /*
         刷新
@@ -84,6 +82,16 @@ public class RunActivity extends AppCompatActivity {
             public void onRefresh() {
                 requestRun(LoginActivity.idNumeber,MainActivity.stuName);
 
+            }
+        });
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset>=0){
+                    refreshLayout.setEnabled(true);
+                }else {
+                    refreshLayout.setEnabled(false);
+                }
             }
         });
 
@@ -124,6 +132,7 @@ public class RunActivity extends AppCompatActivity {
                         if (exercise!=null&&"success".equals(exercise.query)){
                             showRun(exercise);
                         }else {
+                            showZero();
                             Toast.makeText(RunActivity.this,"您本学期并未跑步",Toast.LENGTH_SHORT).show();
                         }
                         refreshLayout.setRefreshing(false);
@@ -150,7 +159,18 @@ public class RunActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         scrollView.smoothScrollTo(0,0);
         runLayout.addView(detailView);
+        runLayout.setVisibility(View.VISIBLE);
 
+
+    }
+
+    private void showZero(){
+        runLayout.removeAllViews();
+        View timesView= LayoutInflater.from(this).inflate(R.layout.run_times,runLayout,false);
+        TextView runTimes= (TextView)timesView.findViewById(R.id.run_times);
+        runTimes.setText("0");
+        runLayout.addView(timesView);
+        runLayout.setVisibility(View.VISIBLE);
 
     }
 
