@@ -102,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.bg).into(bg);
 
 
-
-
-
-
-
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -164,6 +159,9 @@ public class MainActivity extends AppCompatActivity {
         usesList.add(library);
     }
 
+    /*
+   加载天气数据
+    */
     public void requestWeather(){
         final String weatherUrl="http://guolin.tech/api/weather?cityid=CN101190101&key=56ad57d30e4e43888f020ed6a592dd40";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
@@ -190,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+     /*
+    展示天气数据
+     */
     private void showWeatherInfo(WeatherNow weatherNow){
         String updateTime =weatherNow.basic.update.loc.split(" ")[0];
         String weatherInfo = weatherNow.now.cond.txt;
@@ -201,15 +202,7 @@ public class MainActivity extends AppCompatActivity {
         weatherInfoText.setText(weatherInfo);
         degreeText.setText(degree);
 
-
-
-
     }
-
-
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

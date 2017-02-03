@@ -58,6 +58,7 @@ public class RunActivity extends AppCompatActivity {
         mAppBarLayout= (AppBarLayout) findViewById(R.id.run_appBar);
 
 
+        //设置Title
         setSupportActionBar(mToolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
@@ -74,7 +75,7 @@ public class RunActivity extends AppCompatActivity {
 
 
         /*
-        刷新
+        刷新并使得刷新位置在最上方。
          */
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,18 +95,10 @@ public class RunActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
     }
-
-
+    /*
+    通过网络请求跑操数据
+     */
     private void requestRun(final String id,final String name){
         String runUrl="http://115.28.223.204/exercise?method=fetch&type=DETAIL&student_id="+id+"&student_name="+name;
         HttpUtil.sendOkHttpRequest(runUrl, new Callback() {
@@ -144,6 +137,9 @@ public class RunActivity extends AppCompatActivity {
 
     }
 
+     /*
+    展示数据
+     */
     private void showRun(Exercise exercise){
         String times=exercise.times;
         runLayout.removeAllViews();

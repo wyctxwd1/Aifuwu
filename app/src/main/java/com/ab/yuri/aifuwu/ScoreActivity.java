@@ -64,7 +64,9 @@ public class ScoreActivity extends AppCompatActivity {
         scoreLayout= (LinearLayout) findViewById(R.id.score_content);
         scoreScroll= (NestedScrollView) findViewById(R.id.score_scroll);
 
-
+        /*
+        设置Title
+         */
         setSupportActionBar(mToolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
@@ -82,14 +84,13 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         /*
-        刷新
+        刷新并使得刷新位置在最上方。
          */
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 requestScore(LoginActivity.idNumeber,LoginActivity.idPassword);
-
             }
         });
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -102,23 +103,14 @@ public class ScoreActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
 
 
+    /*
+    通过网络请求成绩数据
+     */
     private void requestScore(final String id,final String password){
         String scoreUrl="http://115.28.223.204/zf.php?method=score&app_secret=neoix&student_id="+id+"&student_password="+password;
         HttpUtil.sendOkHttpRequest(scoreUrl, new Callback() {
@@ -158,10 +150,13 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
-
+    /*
+    展示数据
+     */
     private void showScore(GPA gpa){
         scoreLayout.removeAllViews();
         String GPA=gpa.gpa;
+
         for (int i=gpa.detail.size()-1;i>=0;i--){
             scoreList.add(gpa.detail.get(i));
         }
@@ -186,10 +181,6 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         scoreLayout.setVisibility(View.VISIBLE);
-
-
-
-
 
 
     }
@@ -223,9 +214,4 @@ public class ScoreActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     }
-
-
-
-
-
 }

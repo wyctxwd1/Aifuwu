@@ -28,12 +28,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -60,6 +54,8 @@ public class SchooldaysActivity extends AppCompatActivity {
         schooldaysContentView = (ImageView) findViewById(R.id.schooldays_content_img);
 
 
+        //设置Title
+
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -68,7 +64,7 @@ public class SchooldaysActivity extends AppCompatActivity {
         collapsingToolbar.setTitle("校历");
         Glide.with(this).load(R.drawable.schooldays_title_view).into(schooldaysTitleView);
 
-
+        //开启子线程从网络爬取校历图片
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -96,12 +92,9 @@ public class SchooldaysActivity extends AppCompatActivity {
 
     }
 
-
-private void showSchoolDays(String imgUrl){
+    //展示图片
+    private void showSchoolDays(String imgUrl){
     final String schoolDaysUrl="http://jwc.njupt.edu.cn"+imgUrl;
-
-
-
     Glide.with(this).load(schoolDaysUrl).into(schooldaysContentView);
     schooldaysContentView.setOnClickListener(new View.OnClickListener() {
         @Override
