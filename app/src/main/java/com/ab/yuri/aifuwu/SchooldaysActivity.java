@@ -96,6 +96,8 @@ public class SchooldaysActivity extends AppCompatActivity {
     private void showSchoolDays(String imgUrl){
     final String schoolDaysUrl="http://jwc.njupt.edu.cn"+imgUrl;
     Glide.with(this).load(schoolDaysUrl).into(schooldaysContentView);
+
+    //点击弹开大图
     schooldaysContentView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
