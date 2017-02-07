@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ab.yuri.aifuwu.gson.Info;
@@ -42,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     public ProgressDialog progressDialog;
     public static String idNumeber;
     public static String idPassword;
-    private ImageView bgLogin;
+    private RelativeLayout bg;
+
 
 
 
@@ -57,7 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         passwordEdit= (EditText) findViewById(R.id.password);
         login= (Button) findViewById(R.id.login);
         rememberPass= (CheckBox) findViewById(R.id.remember_pass);
-        bgLogin= (ImageView) findViewById(R.id.bg_login);
+        bg= (RelativeLayout) findViewById(R.id.login_bg);
+
+
 
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         boolean isRemember=pref.getBoolean("remember_password",false);
@@ -87,15 +91,25 @@ public class LoginActivity extends AppCompatActivity {
 
 
         /*
-        加载必应每日一图作为背景
+        设置背景
          */
-        String bingPic=pref.getString("bing_pic",null);
-        if (bingPic!=null){
-            Glide.with(this).load(bingPic).into(bgLogin);
-        }else {
-            loadBingPic();
-        }
+
+        Glide.with(this).load(R.drawable.bg_login).into(new SimpleTarget<GlideDrawable>() {
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    bg.setBackground(resource);
+                }
+            }
+        });
     }
+
+
+
+
+
+
+
     /*
     显示进度框
      */
@@ -169,33 +183,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-    /*
-    加载必应每日一图
-     */
-
-    private void loadBingPic(){
-        String requestBingPic="http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String bingPic=response.body().string();
-                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
-                editor.putString("bing_pic",bingPic);
-                editor.apply();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(LoginActivity.this).load(bingPic).into(bgLogin);
-                    }
-                });
-
-            }
-        });
-    }
 }

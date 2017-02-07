@@ -33,8 +33,6 @@ public class AutoUpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        updateBingPic();
-
 
         AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
         int anHour=8*60*60*1000;//8小时毫秒数
@@ -44,28 +42,6 @@ public class AutoUpdateService extends Service {
         manager.cancel(pi);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    /*
-    更新必应一图
-     */
-
-    private void updateBingPic(){
-        String requestBingPic="http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String bingPic=response.body().string();
-                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
-                editor.putString("bing_pic",bingPic);
-                editor.apply();
-            }
-        });
     }
 
 
