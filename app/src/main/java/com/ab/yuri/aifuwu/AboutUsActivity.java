@@ -1,5 +1,7 @@
 package com.ab.yuri.aifuwu;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.support.v4.app.Fragment;
@@ -10,8 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -120,6 +124,7 @@ public class AboutUsActivity extends AppCompatActivity{
             animation.setFillAfter(true);//动画终止时停留在最后一帧，不然会回到没有执行前的状态
             animation.setDuration(200);//动画持续时间0.2秒
             tabLine.startAnimation(animation);//是用tabline来显示动画的
+            hideInputKeyboard(AboutUsActivity.this);//切换时隐藏键盘
         }
 
         @Override
@@ -138,6 +143,20 @@ public class AboutUsActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+
+    public  void hideInputKeyboard(final Context context) {
+        final Activity activity = (Activity) context;
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager mInputKeyBoard = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (activity.getCurrentFocus() != null) {
+                    mInputKeyBoard.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                    activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                }
+            }
+        });
+    }
 
 
 

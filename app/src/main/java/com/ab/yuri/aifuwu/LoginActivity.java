@@ -105,18 +105,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
     /*
     显示进度框
      */
     public void showProgressDialog(){
         if (progressDialog==null){
             progressDialog=new ProgressDialog(this);
-            progressDialog.setMessage("正在加载...");
+            progressDialog.setMessage("正在登录...");
             progressDialog.setCanceledOnTouchOutside(false);
         }
         progressDialog.show();
