@@ -7,77 +7,70 @@
     android:id="@+id/refresh_run"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:id="@+id/bg_run"/>
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/run_appBar">
-
-        <android.support.design.widget.CollapsingToolbarLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/run_collapsing_toolbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:scaleType="centerCrop"
+            android:id="@+id/bg_run"/>
 
-            <ImageView
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/run_appBar">
+
+
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/run_image_view"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
+                android:id="@+id/run_collapsing_toolbar"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/run_toolbar"
-                app:layout_collapseMode="pin"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/run_image_view"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"/>
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:id="@+id/run_toolbar"
+                    app:layout_collapseMode="pin"/>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
 
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/run_scroll"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/run_content">
-
-            <include layout="@layout/run_times"/>
-            <include layout="@layout/run_detail"/>
+            android:id="@+id/run_scroll"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/run_content">
 
 
+                <include layout="@layout/run_times"/>
+                <include layout="@layout/run_detail"/>
 
+            </LinearLayout>
 
+        </android.support.v4.widget.NestedScrollView>
 
-        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-    </android.support.v4.widget.NestedScrollView>
-
-
-
-</android.support.design.widget.CoordinatorLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

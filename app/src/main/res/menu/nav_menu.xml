@@ -16,9 +16,9 @@
             android:title="校历"
             android:icon="@drawable/img_schooldays_big"/>
         <item
-            android:id="@+id/library"
-            android:title="图书馆"
-            android:icon="@drawable/img_library_big"/>
+            android:id="@+id/oneday"
+            android:title="一图一言"
+            android:icon="@drawable/img_oneday_big"/>
 
         <item
             android:id="@+id/about_us"

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ab.yuri.aifuwu.OnedayActivity;
 import com.ab.yuri.aifuwu.R;
 import com.ab.yuri.aifuwu.RunActivity;
 import com.ab.yuri.aifuwu.SchooldaysActivity;
@@ -63,8 +64,13 @@ public class UsesAdapter extends RecyclerView.Adapter<UsesAdapter.ViewHolder> {
                         mContext.startActivity(score);
                         break;
                     case 2:
-                    Intent schooldays = new Intent(mContext, SchooldaysActivity.class);
-                    mContext.startActivity(schooldays);
+                        Intent schooldays = new Intent(mContext, SchooldaysActivity.class);
+                        mContext.startActivity(schooldays);
+                        break;
+                   case 3:
+                       Intent oneday=new Intent(mContext, OnedayActivity.class);
+                       mContext.startActivity(oneday);
+                       break;
                 }
 
 

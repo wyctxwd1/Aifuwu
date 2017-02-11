@@ -8,7 +8,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.design.widget.CoordinatorLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,7 +16,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:id="@+id/bg_score"/>
-
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -45,12 +43,9 @@
                     android:id="@+id/score_toolbar"
                     app:layout_collapseMode="pin"/>
 
-
-
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
-
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -64,7 +59,7 @@
                 android:orientation="vertical"
                 android:id="@+id/score_content">
 
-               <include layout="@layout/score_gpa"/>
+                <include layout="@layout/score_gpa"/>
                 <include layout="@layout/score_detail"/>
 
             </LinearLayout>
@@ -72,4 +67,5 @@
         </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>
+
 </android.support.v4.widget.SwipeRefreshLayout>

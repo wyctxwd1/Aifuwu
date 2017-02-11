@@ -122,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         break;
 
+                    case R.id.oneday:
+                        Intent oneday=new Intent(MainActivity.this, OnedayActivity.class);
+                        startActivity(oneday);
+                        mDrawerLayout.closeDrawers();
+                        break;
+
                     case R.id.about_us:
                         Intent aboutUs=new Intent(MainActivity.this,AboutUsActivity.class);
                         startActivity(aboutUs);
@@ -156,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         usesList.add(score);
         Uses schooldays=new Uses("校历",R.drawable.img_schooldays_big);
         usesList.add(schooldays);
-        Uses library=new Uses("图书馆",R.drawable.img_library_big);
+        Uses library=new Uses("一图一言",R.drawable.img_oneday_big);
         usesList.add(library);
     }
 

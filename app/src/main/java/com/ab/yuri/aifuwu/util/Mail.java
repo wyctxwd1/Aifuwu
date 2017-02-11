@@ -33,7 +33,9 @@ public class Mail {
         Message msg = new MimeMessage(session);
         msg.setSubject("南邮助手反馈");
         // 设置邮件内容
-        msg.setText(content+"\n"+email);
+        String feedbackContent="反馈内容："+content;
+        String feedbackEmail="联系方式："+email;
+        msg.setText(feedbackContent+"\n"+feedbackEmail);
         // 设置发件人
         msg.setFrom(new InternetAddress("wyctxwd3@163.com"));
 

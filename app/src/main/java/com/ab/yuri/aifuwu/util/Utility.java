@@ -5,6 +5,8 @@ package com.ab.yuri.aifuwu.util;
 import com.ab.yuri.aifuwu.gson.Exercise;
 import com.ab.yuri.aifuwu.gson.GPA;
 import com.ab.yuri.aifuwu.gson.Info;
+import com.ab.yuri.aifuwu.gson.Oneday;
+import com.ab.yuri.aifuwu.gson.OnedayImg;
 import com.ab.yuri.aifuwu.gson.WeatherNow;
 import com.google.gson.Gson;
 
@@ -33,6 +35,9 @@ public class Utility {
     }
 
     public static Exercise handleExerciseResponse(String response){
+        /*
+        解析和处理返回的Exercise信息
+        */
         try {
             Gson gson=new Gson();
             Exercise exercise=gson.fromJson(response,Exercise.class);
@@ -44,6 +49,9 @@ public class Utility {
     }
 
     public static GPA handleGPAResponse(String response){
+         /*
+        解析和处理返回的GPA信息
+        */
         try {
             Gson gson=new Gson();
             GPA gpa=gson.fromJson(response,GPA.class);
@@ -55,6 +63,9 @@ public class Utility {
     }
 
     public static WeatherNow handleWeatherResponse(String response){
+         /*
+        解析和处理返回的WeatherNow信息
+        */
         try {
             JSONObject jsonObject=new JSONObject(response);
             JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
@@ -69,18 +80,32 @@ public class Utility {
     }
 
 
+    public static Oneday handleOnedayResponse(String response){
+         /*
+        解析和处理返回的Oneday信息
+        */
+        try {
+            Gson gson=new Gson();
+            Oneday oneday=gson.fromJson(response,Oneday.class);
+            return oneday;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public static OnedayImg handleOnedayImgResponse(String response){
+         /*
+        解析和处理返回的Oneday信息
+        */
+        try {
+            Gson gson=new Gson();
+            OnedayImg onedayImg=gson.fromJson(response,OnedayImg.class);
+            return onedayImg;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
