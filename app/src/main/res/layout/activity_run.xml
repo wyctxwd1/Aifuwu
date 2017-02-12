@@ -10,7 +10,8 @@
     <android.support.design.widget.CoordinatorLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <ImageView
             android:layout_width="match_parent"
@@ -21,7 +22,8 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:id="@+id/run_appBar">
+            android:id="@+id/run_appBar"
+            android:fitsSystemWindows="true">
 
 
             <android.support.design.widget.CollapsingToolbarLayout
@@ -30,14 +32,16 @@
                 android:id="@+id/run_collapsing_toolbar"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:fitsSystemWindows="true">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/run_image_view"
                     android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"/>
+                    app:layout_collapseMode="parallax"
+                    android:fitsSystemWindows="true"/>
 
                 <android.support.v7.widget.Toolbar
                     android:layout_width="match_parent"

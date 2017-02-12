@@ -3,7 +3,9 @@ package com.ab.yuri.aifuwu;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -43,7 +45,12 @@ public class AboutUsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
+
         mToolbar= (Toolbar) findViewById(R.id.about_us_toolbar);
+
+
+
+
         setSupportActionBar(mToolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){

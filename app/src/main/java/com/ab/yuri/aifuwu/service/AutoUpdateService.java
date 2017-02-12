@@ -10,8 +10,11 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
 import com.ab.yuri.aifuwu.LoginActivity;
+import com.ab.yuri.aifuwu.MainActivity;
 import com.ab.yuri.aifuwu.RecyclerView.AboutUsAdapter;
+import com.ab.yuri.aifuwu.gson.WeatherNow;
 import com.ab.yuri.aifuwu.util.HttpUtil;
+import com.ab.yuri.aifuwu.util.Utility;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
@@ -33,6 +36,7 @@ public class AutoUpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        updateWeather();
 
         AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
         int anHour=8*60*60*1000;//8小时毫秒数
@@ -42,6 +46,34 @@ public class AutoUpdateService extends Service {
         manager.cancel(pi);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
         return super.onStartCommand(intent, flags, startId);
+    }
+    /*
+     更新天气信息
+     */
+
+    private void updateWeather(){
+            String weatherUrl="http://guolin.tech/api/weather?cityid=CN101190101&key=56ad57d30e4e43888f020ed6a592dd40";
+
+            HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String responseText=response.body().string();
+                    WeatherNow weatherNow=Utility.handleWeatherResponse(responseText);
+                    if (weatherNow!=null&&"ok".equals(weatherNow.status)){
+                        SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
+                        editor.putString("weather",responseText);
+                        editor.apply();
+                    }
+
+                }
+            });
+
+
     }
 
 

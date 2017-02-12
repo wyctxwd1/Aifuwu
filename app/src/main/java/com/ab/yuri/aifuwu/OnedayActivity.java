@@ -2,6 +2,8 @@ package com.ab.yuri.aifuwu;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +46,8 @@ public class OnedayActivity extends AppCompatActivity {
         mToolbar= (Toolbar) findViewById(R.id.oneday_toolbar);
         onedayLayout= (LinearLayout) findViewById(R.id.oneday_layout);
         img= (ImageView) findViewById(R.id.oneday_img);
+
+
 
         //设置Title
         setSupportActionBar(mToolbar);

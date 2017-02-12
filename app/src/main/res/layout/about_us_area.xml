@@ -11,10 +11,11 @@
         android:id="@+id/about_us_title"
         android:padding="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/icon_image"
+            android:src="@drawable/icon"
             android:layout_centerInParent="true"/>
 
         <TextView
