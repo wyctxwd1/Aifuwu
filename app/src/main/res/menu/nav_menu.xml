@@ -17,7 +17,7 @@
             android:icon="@drawable/img_schooldays_big"/>
         <item
             android:id="@+id/oneday"
-            android:title="一图一言"
+            android:title="一言"
             android:icon="@drawable/img_oneday_big"/>
 
         <item

@@ -57,37 +57,15 @@ public class OnedayActivity extends AppCompatActivity {
         }
 
 
-        requestOnedayImg();
+        Glide.with(OnedayActivity.this)
+                .load("https://blog.mayuko.cn/api/one-api/img.php")
+                .placeholder(R.drawable.loading)
+                .crossFade()
+                .into(img);
+
         requestOnedayText();
 
     }
-
-    private void requestOnedayImg(){
-        String onedayImgUrl="http://tu.ihuan.me/tu/api/me_all_pic_json/";
-        HttpUtil.sendOkHttpRequest(onedayImgUrl, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String responseText=response.body().string();
-                final OnedayImg onedayImg= Utility.handleOnedayImgResponse(responseText);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(OnedayActivity.this)
-                                .load(onedayImg.link)
-                                .placeholder(R.drawable.loading)
-                                .crossFade()
-                                .into(img);
-                    }
-                });
-            }
-        });
-    }
-
 
 
 

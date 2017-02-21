@@ -146,10 +146,14 @@ public class ScoreActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        if (gpa!=null){
-                            showScore(gpa);
+                        if (gpa != null) {
+                            if (gpa.gpa!=null){
+                                showScore(gpa);
+                            }else {
+                                Toast.makeText(ScoreActivity.this,"服务器错误",Toast.LENGTH_SHORT).show();
+                            }
                         }else {
-                            Toast.makeText(ScoreActivity.this,"您可能还没有考试成绩",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ScoreActivity.this,"服务器错误",Toast.LENGTH_SHORT).show();
                         }
                         refreshLayout.setRefreshing(false);
                     }

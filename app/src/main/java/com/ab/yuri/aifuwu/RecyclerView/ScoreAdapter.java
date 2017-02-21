@@ -22,7 +22,6 @@ import java.util.List;
  */
 
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder>{
-    private Context mContext;
     private List<GPA.DetailBean> mScoreList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{

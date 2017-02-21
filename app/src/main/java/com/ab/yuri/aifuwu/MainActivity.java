@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         usesList.add(score);
         Uses schooldays=new Uses("校历",R.drawable.img_schooldays_big);
         usesList.add(schooldays);
-        Uses library=new Uses("一图一言",R.drawable.img_oneday_big);
+        Uses library=new Uses("一言",R.drawable.img_oneday_big);
         usesList.add(library);
     }
 
