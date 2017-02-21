@@ -1,8 +1,10 @@
 package com.ab.yuri.aifuwu;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
@@ -74,6 +76,11 @@ public class ScoreActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
+
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        final String account=prefs.getString("account","");
+        final String password=prefs.getString("password_save","");
+
         /*
         设置Title
          */
@@ -88,7 +95,7 @@ public class ScoreActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.bg_score).into(bgScore);
 
         showProgressDialog();
-        requestScore(LoginActivity.idNumeber,LoginActivity.idPassword);
+        requestScore(account,password);
 
         scoreLayout.setVisibility(View.INVISIBLE);
 
@@ -100,7 +107,7 @@ public class ScoreActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestScore(LoginActivity.idNumeber,LoginActivity.idPassword);
+                requestScore(account,password);
             }
         });
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

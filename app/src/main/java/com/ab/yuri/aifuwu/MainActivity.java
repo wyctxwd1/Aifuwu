@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String STUDENT_NAME="student_name";
     public static final String STUDENT_DEPARTMENT="student_department";
     public static final String STUDENT_MAJOR="student_major";
-    public static String stuName;
     private List<Uses> usesList=new ArrayList<>();
     private UsesAdapter adapter;
     private DrawerLayout mDrawerLayout;
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         final String studentName=intent.getStringExtra(STUDENT_NAME);
         final String studentDepartment=intent.getStringExtra(STUDENT_DEPARTMENT);
         final String studentMajor=intent.getStringExtra(STUDENT_MAJOR);
-        stuName=intent.getStringExtra(STUDENT_NAME);
 
         mainToolbar= (Toolbar) findViewById(R.id.main_toolbar);
         mDrawerLayout= (DrawerLayout) findViewById(R.id.main_drawer_layout);

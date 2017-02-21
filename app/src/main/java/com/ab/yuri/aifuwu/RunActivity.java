@@ -1,7 +1,9 @@
 package com.ab.yuri.aifuwu;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,6 +70,9 @@ public class RunActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        final String account=prefs.getString("account","");
+        final String stuName=prefs.getString("student_name","");
 
         //设置Title
         setSupportActionBar(mToolbar);
@@ -79,7 +85,7 @@ public class RunActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.run_title).into(runTitleView);
         Glide.with(this).load(R.drawable.bg_run).into(bgRun);
 
-        requestRun(LoginActivity.idNumeber,MainActivity.stuName);
+        requestRun(account,stuName);
 
         runLayout.setVisibility(View.INVISIBLE);
 
@@ -91,7 +97,7 @@ public class RunActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestRun(LoginActivity.idNumeber,MainActivity.stuName);
+                requestRun(account,stuName);
 
             }
         });

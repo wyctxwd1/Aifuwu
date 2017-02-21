@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private CheckBox rememberPass;
     public ProgressDialog progressDialog;
-    public static String idNumeber;
-    public static String idPassword;
     private RelativeLayout bg;
 
 
@@ -94,8 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        idNumeber=accountExit.getText().toString();
-        idPassword=passwordEdit.getText().toString();
+
 
 
 
@@ -161,9 +158,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        if (info.studentName!=null){
+                        if (info!=null&&info.studentName!=null){
                             SharedPreferences.Editor editor=pref.edit();
                             editor.putString("account",account);
+                            editor.putString("password_save",password);
+                            editor.putString("student_name",info.studentName);
                             if (rememberPass.isChecked()){
                                 editor.putBoolean("remember_password",true);
                                 editor.putString("password",password);
