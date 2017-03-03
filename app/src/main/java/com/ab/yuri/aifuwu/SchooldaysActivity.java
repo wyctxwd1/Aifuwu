@@ -1,11 +1,9 @@
 package com.ab.yuri.aifuwu;
 
-import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.DocumentsContract;
+import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -16,10 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.ab.yuri.aifuwu.gson.WeatherNow;
+import com.ab.yuri.aifuwu.service.AutoUpdateService;
+import com.ab.yuri.aifuwu.util.Utility;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -36,7 +35,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class SchooldaysActivity extends AppCompatActivity {
 
 
-    public String imgUrl;
+
     private ImageView schooldaysContentView;
     private ImageView schooldaysTitleView;
     private CollapsingToolbarLayout collapsingToolbar;
@@ -74,31 +73,40 @@ public class SchooldaysActivity extends AppCompatActivity {
         collapsingToolbar.setTitle("校历");
         Glide.with(this).load(R.drawable.schooldays_title_view).into(schooldaysTitleView);
 
-        //开启子线程从网络爬取校历图片
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Document doc;
-                try {
-                    doc = Jsoup.connect("http://jwc.njupt.edu.cn/s/24/t/923/5a/df/info88799.htm").get();
-                    Elements jpgs = doc.select("img[src$=.jpg]");
-                    for (Element e : jpgs) {
-                        imgUrl = e.attr("src");
+
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        String imgUrl=prefs.getString("schooldays_pic",null);
+        if (imgUrl!=null){
+            //有缓存时直接解析URL
+            showSchoolDays(imgUrl);
+        }else {
+            //没有缓存时开启子线程从网络爬取校历图片
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Document doc;
+                    try {
+                        doc = Jsoup.connect("http://jwc.njupt.edu.cn/s/24/t/923/5a/df/info88799.htm").get();
+                        Elements jpgs = doc.select("img[src$=.jpg]");
+                        final String schooldaysImgUrl= jpgs.attr("src");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(SchooldaysActivity.this).edit();
+                                editor.putString("schooldays_pic",schooldaysImgUrl);
+                                editor.apply();
+                                showSchoolDays(schooldaysImgUrl);
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
 
                     }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSchoolDays(imgUrl);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
 
                 }
+            }).start();
+        }
 
-            }
-        }).start();
 
     }
 

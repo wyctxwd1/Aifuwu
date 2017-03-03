@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         bg= (RelativeLayout) findViewById(R.id.login_bg);
 
 
+        //沉浸式状态栏
         if (Build.VERSION.SDK_INT>=21){
             View decorView=getWindow().getDecorView();
             decorView.setSystemUiVisibility(
@@ -80,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
             passwordEdit.setText(password);
             rememberPass.setChecked(true);
         }
-
 
 
         login.setOnClickListener(new View.OnClickListener() {

@@ -49,8 +49,6 @@ public class AboutUsActivity extends AppCompatActivity{
         mToolbar= (Toolbar) findViewById(R.id.about_us_toolbar);
 
 
-
-
         setSupportActionBar(mToolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
@@ -95,7 +93,7 @@ public class AboutUsActivity extends AppCompatActivity{
 
 
 
-        //imageview设置平移，使下划线平移到初始位置（平移一个offset）
+        //ImageView设置平移，使下划线平移到初始位置（平移一个offset）
         Matrix matrix=new Matrix();
         matrix.postTranslate(offset,0);
         tabLine.setImageMatrix(matrix);

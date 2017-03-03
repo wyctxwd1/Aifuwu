@@ -25,7 +25,6 @@ public class Mail {
         props.setProperty("mail.host", "smtp.163.com");
         // 发送邮件协议名称
         props.setProperty("mail.transport.protocol", "smtp");
-
         // 设置环境信息
         Session session = Session.getInstance(props);
 

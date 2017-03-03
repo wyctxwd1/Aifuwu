@@ -10,7 +10,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="        如果您遇到了什么问题或者有什么好玩的想法，欢迎对我们进行反馈。(ง •̀_•́)ง">
+            android:text="@string/feedback_intro">
         </TextView>
 
 
@@ -37,7 +37,7 @@
                 android:id="@+id/feedback_content"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:hint="   请输入您的反馈意见"
+                android:hint="@string/your_feedback"
                 android:gravity="top"
                 android:background="@null"/>
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_gravity="center_vertical"
-                    android:text="您的邮箱："
+                    android:text="@string/your_email"
                     android:textColor="#706F6D"
                     android:textSize="18sp"/>
 
@@ -74,9 +74,9 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:hint="选填，便于我们给您反馈"
+                    android:hint="@string/feedback_forUs"
                     android:background="@null"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:imeOptions="actionDone"/>
 
@@ -89,7 +89,7 @@
             android:id="@+id/feedback_submit"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="提交反馈"
+            android:text="@string/feedback_submit"
             android:textSize="18sp"
             android:layout_gravity="center_horizontal"/>
 

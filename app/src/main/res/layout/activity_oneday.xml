@@ -38,6 +38,7 @@
             android:scaleType="centerCrop"
             android:layout_margin="10dp"
             android:id="@+id/oneday_img"/>
+        <include layout="@layout/oneday_detail"/>
 
     </LinearLayout>
 
@@ -57,7 +58,7 @@
             android:background="#00000000"
             android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="（注意图片缓存，请及时清理）   乁( ˙ ω˙乁)"
+            android:text="@string/remind_img_cache"
             android:textSize="12sp"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
