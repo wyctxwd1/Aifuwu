@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.ab.yuri.aifuwu.RecyclerView.Uses;
 import com.ab.yuri.aifuwu.RecyclerView.UsesAdapter;
 import com.ab.yuri.aifuwu.gson.WeatherNow;
+import com.ab.yuri.aifuwu.service.AutoUpdateService;
 import com.ab.yuri.aifuwu.util.HttpUtil;
 import com.ab.yuri.aifuwu.util.Utility;
 import com.bumptech.glide.Glide;
@@ -230,6 +231,10 @@ public class MainActivity extends AppCompatActivity {
         update.setText(updateTime);
         weatherInfoText.setText(weatherInfo);
         degreeText.setText(degree);
+
+        //激活自动更新服务
+        Intent intent=new Intent(this, AutoUpdateService.class);
+        startService(intent);
 
     }
 
