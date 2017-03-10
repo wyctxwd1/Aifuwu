@@ -117,7 +117,7 @@ public class RunActivity extends AppCompatActivity {
     通过网络请求跑操数据
      */
     private void requestRun(final String id,final String name){
-        String runUrl="http://115.28.223.204/exercise?method=fetch&type=DETAIL&student_id="+id+"&student_name="+name;
+        String runUrl=""+id+"&student_name="+name;
         HttpUtil.sendOkHttpRequest(runUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

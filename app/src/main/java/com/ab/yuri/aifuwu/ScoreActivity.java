@@ -129,7 +129,7 @@ public class ScoreActivity extends AppCompatActivity {
     通过网络请求成绩数据
      */
     private void requestScore(final String id,final String password){
-        String scoreUrl="http://115.28.223.204/zf.php?method=score&app_secret=xxxxx&student_id="+id+"&student_password="+password;
+        String scoreUrl=""+id+"&student_password="+password;
         HttpUtil.sendOkHttpRequest(scoreUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

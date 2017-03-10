@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void requestInfo(final String account,final String password){
         showProgressDialog();
-        String infoUrl="http://115.28.223.204/zf.php?method=info&app_secret=xxxxx&student_id="+account+"&student_password="+password;
+        String infoUrl=""+account+"&student_password="+password;
         HttpUtil.sendOkHttpRequest(infoUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
